@@ -47,11 +47,14 @@ ENV TYPO3_VERSION "7.6.16"
 ENV TYPO3_MD5_CHECKSUM "7fffa86463ab7e0a84d003afbed0c882"
 
 RUN set -ex; \
-    wget  https://get.typo3.org/${TYPO3_VERSION} -O html.tar.gz; \
-    echo "$TYPO3_MD5_CHECKSUM *html.tar.gz" | md5sum -c -; \
-    tar -xzf html.tar.gz -C /var/www/; \
-    rm html.tar.gz; \
+    wget  https://get.typo3.org/${TYPO3_VERSION} -O typo3.tar.gz; \
+    echo "$TYPO3_MD5_CHECKSUM *typo3.tar.gz" | md5sum -c -; \
+    tar -xzf typo3.tar.gz -C /var/www/html; \
+    rm typo3.tar.gz; \
     cd /var/www/html; \
+    ln -s typo3_src-* typo3_src; \
+    ln -s typo3_src/index.php; \
+    ln -s typo3_src/typo3; \
     ln -s _.htaccess .htaccess; \
     mkdir typo3temp; \
     mkdir typo3conf; \
