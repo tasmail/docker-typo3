@@ -18,7 +18,7 @@ RUN set -ex; \
     docker-php-ext-configure gd --with-freetype-dir=/usr --with-png-dir=/usr --with-jpeg-dir=/usr; \
     docker-php-ext-install gd mysqli opcache zip soap mcrypt
 
-RUN apt-get update && apt-get install -y libmagickwand-6.q16-dev --no-install-recommends \
+RUN apt-get update && apt-get install -y imagemagick libmagickwand-6.q16-dev --no-install-recommends \
 && ln -s /usr/lib/x86_64-linux-gnu/ImageMagick-6.8.9/bin-Q16/MagickWand-config /usr/bin \
 && pecl install imagick \
 && echo "extension=imagick.so" > /usr/local/etc/php/conf.d/ext-imagick.ini
@@ -55,7 +55,7 @@ RUN set -ex; \
     ln -s typo3_src-* typo3_src; \
     ln -s typo3_src/index.php; \
     ln -s typo3_src/typo3; \
-    ln -s _.htaccess .htaccess; \
+    ln -s typo3_src/_.htaccess .htaccess; \
     mkdir typo3temp; \
     mkdir typo3conf; \
     mkdir fileadmin; \
