@@ -1,0 +1,21 @@
+#!/bin/bash
+
+TYPO3_VERSION="7.6.16"
+TYPO3_MD5_CHECKSUM="7fffa86463ab7e0a84d003afbed0c882"
+
+
+set -ex
+wget  https://get.typo3.org/${TYPO3_VERSION} -O typo3.tar.gz
+echo "$TYPO3_MD5_CHECKSUM *typo3.tar.gz" | md5sum -c -
+tar -xzf typo3.tar.gz
+rm typo3.tar.gz
+ln -s typo3_src-* typo3_src
+ln -s typo3_src/index.php
+ln -s typo3_src/typo3
+ln -s typo3_src/_.htaccess .htaccess
+mkdir typo3temp
+mkdir typo3conf
+mkdir fileadmin
+mkdir uploads
+touch FIRST_INSTALL
+chown -R www-data:www-data .
