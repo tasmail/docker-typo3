@@ -63,4 +63,6 @@ RUN set -ex; \
     touch FIRST_INSTALL; \
     chown -R www-data:www-data /var/www/html
 
+RUN a2enmod rewrite
+
 WORKDIR /var/www/html
